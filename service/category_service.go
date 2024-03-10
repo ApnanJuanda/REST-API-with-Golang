@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-
 	"katalisStack.com/practice-golang-restful-api/model/web"
 )
 

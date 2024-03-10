@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"database/sql"
-
 	"katalisStack.com/practice-golang-restful-api/model/domain"
 )
 

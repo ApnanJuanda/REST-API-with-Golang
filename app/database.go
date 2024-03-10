@@ -2,13 +2,27 @@ package app
 
 import (
 	"database/sql"
-	"time"
-
+	"fmt"
+	"github.com/joho/godotenv"
 	"katalisStack.com/practice-golang-restful-api/helper"
+	"os"
+	"time"
 )
 
 func NewDB() *sql.DB {
-	db, err := sql.Open("mysql", "root@tcp(localhost:3306)/belajar_golang_restful_api")
+
+	// ENV Configuration
+	err := godotenv.Load("config/.env")
+	helper.PanicIfError(err)
+
+	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+		os.Getenv("MYUSER"),
+		os.Getenv("MYPASSWORD"),
+		os.Getenv("MYHOST"),
+		os.Getenv("MYPORT"),
+		os.Getenv("MYDATABASE"))
+
+	db, err := sql.Open("mysql", mysqlInfo)
 	helper.PanicIfError(err)
 
 	db.SetMaxIdleConns(5)

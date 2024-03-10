@@ -12,7 +12,10 @@ func ReadFromRequestBody(request *http.Request, result interface{}) {
 }
 
 func WriteToResponseBody(writer http.ResponseWriter, response interface{}) {
+	// set header
 	writer.Header().Add("Content-Type", "application/json")
+
+	// encode
 	encoder := json.NewEncoder(writer)
 	err := encoder.Encode(response)
 	PanicIfError(err)

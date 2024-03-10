@@ -1,9 +1,8 @@
 package controller
 
 import (
-	"net/http"
-
 	"github.com/julienschmidt/httprouter"
+	"net/http"
 )
 
 type CategoryController interface {
