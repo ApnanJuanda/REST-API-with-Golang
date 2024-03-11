@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 	"github.com/julienschmidt/httprouter"
 	"katalisStack.com/practice-golang-restful-api/app"
 	"katalisStack.com/practice-golang-restful-api/controller"
@@ -11,6 +12,7 @@ import (
 	"katalisStack.com/practice-golang-restful-api/repository"
 	"katalisStack.com/practice-golang-restful-api/service"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -30,11 +32,13 @@ func main() {
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
 
 	fmt.Println("My Application is running")
+	err := godotenv.Load("config/.env")
+	helper.PanicIfError(err)
 	server := http.Server{
-		Addr:    "localhost:3000",
+		Addr:    os.Getenv("MYURL"),
 		Handler: router,
 	}
 
-	err := server.ListenAndServe()
+	err = server.ListenAndServe()
 	helper.PanicIfError(err)
 }
