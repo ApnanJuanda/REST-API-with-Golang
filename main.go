@@ -35,7 +35,7 @@ func main() {
 	err := godotenv.Load("config/.env")
 	helper.PanicIfError(err)
 	server := http.Server{
-		Addr:    os.Getenv("MYURL"),
+		Addr:    ":" + os.Getenv("PORT"),
 		Handler: router,
 	}
 
